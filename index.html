@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VertexStudio — 3D Scene Editor</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Top Menu Bar -->
+      <header id="menubar"></header>
+
+      <!-- Left Scene Outliner -->
+      <aside id="outliner-panel" class="side-panel"></aside>
+
+      <!-- Center 3D Viewport -->
+      <main id="viewport-container">
+        <canvas id="viewport-canvas"></canvas>
+
+        <!-- Floating Transform & Shading Toolbar -->
+        <div id="viewport-toolbar"></div>
+
+        <!-- Quick-Add Primitive Rail -->
+        <div id="viewport-left-hud"></div>
+
+        <!-- Interactive 3D Orientation Gizmo -->
+        <canvas id="orientation-gizmo" title="Click an axis to align camera"></canvas>
+
+        <!-- Real-time Scene Metrics -->
+        <div id="viewport-info"></div>
+
+        <!-- Drag & Drop Overlay -->
+        <div id="drop-overlay">
+          <h3>Drop 3D Model or HDRI</h3>
+          <p>Supports .GLB, .GLTF, .OBJ, .STL, .HDR, and .JSON projects</p>
+        </div>
+      </main>
+
+      <!-- Right Properties Inspector -->
+      <aside id="inspector-panel" class="side-panel"></aside>
+
+      <!-- Bottom Status Bar -->
+      <footer id="statusbar"></footer>
+    </div>
+
+    <!-- Hidden File Inputs -->
+    <input
+      type="file"
+      id="file-import-input"
+      accept=".glb,.gltf,.obj,.stl,.json,.hdr"
+      multiple
+      hidden
+    />
+    <input type="file" id="hdri-import-input" accept=".hdr" hidden />
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <!-- Keyboard Shortcuts Modal -->
+    <div id="shortcuts-modal" class="modal-backdrop">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>Keyboard Shortcuts</h3>
+          <button class="icon-btn" data-close-modal title="Close">
+            <svg viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="shortcut-grid">
+            <div class="shortcut-row"><span>Select Mode</span><kbd>Q</kbd></div>
+            <div class="shortcut-row"><span>Move Gizmo</span><kbd>G / W</kbd></div>
+            <div class="shortcut-row"><span>Rotate Gizmo</span><kbd>R / E</kbd></div>
+            <div class="shortcut-row"><span>Scale Gizmo</span><kbd>S</kbd></div>
+            <div class="shortcut-row"><span>World / Local Space</span><kbd>L</kbd></div>
+            <div class="shortcut-row"><span>Persp / Ortho Camera</span><kbd>P</kbd></div>
+            <div class="shortcut-row"><span>Undo</span><kbd>Ctrl+Z</kbd></div>
+            <div class="shortcut-row"><span>Redo</span><kbd>Ctrl+Y</kbd></div>
+            <div class="shortcut-row"><span>Duplicate Selected</span><kbd>Shift+D</kbd></div>
+            <div class="shortcut-row"><span>Delete Selected</span><kbd>Del / X</kbd></div>
+            <div class="shortcut-row"><span>Focus Camera</span><kbd>F</kbd></div>
+            <div class="shortcut-row"><span>Toggle Visibility</span><kbd>H</kbd></div>
+            <div class="shortcut-row"><span>Reset Position</span><kbd>Alt+G</kbd></div>
+            <div class="shortcut-row"><span>Reset Rotation</span><kbd>Alt+R</kbd></div>
+            <div class="shortcut-row"><span>Reset Scale</span><kbd>Alt+S</kbd></div>
+            <div class="shortcut-row"><span>Save Project</span><kbd>Ctrl+S</kbd></div>
+            <div class="shortcut-row"><span>Front / Right / Top</span><kbd>1 / 3 / 7</kbd></div>
+            <div class="shortcut-row"><span>Isometric View</span><kbd>0</kbd></div>
+            <div class="shortcut-row"><span>Toggle Panels</span><kbd>[ / ]</kbd></div>
+            <div class="shortcut-row"><span>Deselect</span><kbd>Esc</kbd></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
